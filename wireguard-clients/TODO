@@ -1,0 +1,5 @@
+Add "Disabled" parameter in the configuration per interface
+ -> save this in the comments file and use it to decide if the interface needs to be started
+
+Add button in the frontent to start / stop the interface
+

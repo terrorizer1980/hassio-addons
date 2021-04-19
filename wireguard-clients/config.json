@@ -1,0 +1,109 @@
+{
+	"name":"WireGuard Clients",
+	"version":"0.3.0",
+	"slug":"wireguard_clients",
+	"description":"Connect to unlimited fast secure Wireguard tunnels (as a client)",
+	"arch":[
+		"armhf", 
+		"armv7", 
+		"aarch64", 
+		"amd64", 
+		"i386"
+   ],
+	"url":"https://github.com/s482dcaw/hassio-addons/wireguard-clients",
+	"webui": "http://[HOST]:[PORT:8243]",
+	"startup":"application",
+	"boot":"auto",
+	"host_network": true,
+	"devices": ["/dev/net/tun"],
+	"hassio_api":true,
+	"privileged":[
+		   "NET_ADMIN"
+	   ],
+	"init":false,
+	"auth_api":true,
+	"ingress":true,
+	"ingress_port": 8243,
+	"panel_icon": "mdi:vpn",
+	"panel_title": "WireGuard VPN",
+	"full_access": false,
+	"options":{
+		"connections":[
+			{ 
+				"interface_name": "wgX",
+				"interface_description": "A description of this interface",
+				"interface_dns": [
+					"DNS_FOR_THIS_INTERFACE optional",
+					"DNS_FOR_THIS_INTERFACE optional"
+				],
+				"interface_private_key": "PRIVATE_KEY",
+				"interface_address": [
+					"IP_ADDRESS, netmask suggested to be /32",
+					"IP_ADDRESS, netmask suggested to be /32"
+				],
+				"interface_preup": [
+					"PREUP_COMMAND optional",
+					"PREUP_COMMAND optional"
+				],
+				"interface_postup": [
+					"POSTUP_COMMAND optional",
+					"POSTUP_COMMAND optional"
+				],
+				"interface_predown": [
+					"PREDOWN_COMMAND optional",
+					"PREDOWN_COMMAND optional"
+				],
+				"interface_postdown": [
+					"POSTDOWN_COMMAND optional",
+					"POSTDOWN_COMMAND optional"
+				],
+				"peer_description": "A description of this tunnel / network",
+				"peer_public_key": "PUBLIC_KEY_OF_THE_SERVER",
+				"peer_pre_shared_key": "PRESHARED_KEY - optional",
+				"peer_endpoint": "IP_OF_THE_SERVER:PORT",
+				"peer_allowed_ips": [
+					"ALLOWED_NETWORKS - include netmask",
+					"ALLOWED_NETWORKS - include netmask"
+				],
+				"peer_persistent_keep_alive": "25 - optional"
+			   }
+		   ]
+	   },
+	   "schema": {
+		   "connections":[
+			   {
+				"interface_name": "str",
+				"interface_description": "str?",
+				"interface_dns": [
+					"str?"
+				],
+				"interface_private_key":"password",
+				"interface_address": [
+					"str?"
+				],
+				"interface_preup": [
+					"str?"
+				],
+				"interface_postup": [
+					"str?"
+				],
+				"interface_predown": [
+					"str?"
+				],
+				"interface_postdown": [
+					"str?"
+				],
+				"peer_description":"str?",
+				"peer_public_key": "str",
+				"peer_pre_shared_key": "str?",
+				"peer_endpoint": "str",
+				"peer_allowed_ips": [
+					"str"
+				],
+				"peer_persistent_keep_alive": "str?"
+			   }
+		   ]
+	   }
+}
+
+

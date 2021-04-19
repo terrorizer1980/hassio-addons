@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Wireguard Clients</title>
+    <link rel="icon" href="{{ x_ingress }}{{ url_for('static',filename='logo.png') }}"/>
+    <link rel= "stylesheet" type= "text/css" href= "{{ x_ingress }}{{ url_for('static',filename='wg-clients.css') }}">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.1.19/css/materialdesignicons.min.css">
+</head>
+
+<body>
+    <section class="section pb-0">
+        <div class="container">
+            <h1 class="title is-full">
+            Monitor Wireguard tunnels
+            </h1>
+	    <progress id="progress-bar" class="is-full progress is-info is-warning" value="0" max="100">Refreshing...</progress>
+        </div>
+    </section>
+    <section class="section" id="wg_show">
+  
+    </section>
+</body>
+
+<script>
+
+var page_refresh = 15000;
+var bar_update = 100;
+var current_ts = 0;
+
+function update_progress() { 
+	var bar = document.getElementById("progress-bar"); 
+	var max = bar.getAttribute("max");
+	var val = (max*current_ts)/page_refresh;
+	bar.setAttribute("value", val);
+	current_ts = current_ts + bar_update;
+	if (current_ts === page_refresh) { 
+		current_ts = 0;
+		bar.setAttribute("value",0);
+	}
+}
+
+function loadXMLDoc() {
+	var wgshow = document.getElementById("wg_show");
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+	if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+		if (xmlhttp.status == 200) {
+		    	wgshow.innerHTML = xmlhttp.responseText;
+		}
+		else if (xmlhttp.status == 400) {
+			alert('There was an error 400');
+		}
+		else {
+			alert('Response: '+ xmlhttp.status + ' Message: '+ xmlhttp.responseText);
+		}
+	}
+	};
+	xmlhttp.open("GET", "{{ x_ingress }}/get_info/", true);
+	xmlhttp.send();
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+	loadXMLDoc();
+	setInterval(function() {
+	   loadXMLDoc();
+	}, page_refresh);
+	setInterval(function() {
+	   update_progress();
+	}, bar_update);
+});
+
+
+</script>
+</html>
+

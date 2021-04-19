@@ -1,0 +1,79 @@
+<div class="container">
+{% for conf_data in alldata %}
+	<div class="card mb-4">
+		<header class="card-header">
+			<p class="card-header-title has-background-info-dark has-text-white level">
+			<span class="level-left"><span class="has-text-weight-light">interface:</span> {{conf_data['name']}}</span>
+             {% if conf_data['interface_description'] != "" %}
+            <span class="is-uppercase level-right">{{ conf_data['interface_description']}} </span>
+             {% endif %}
+			</p>
+			<button class="card-header-icon" aria-label="status">
+				{% if conf_data['status'] == "running" %}
+				<span class="icon-text has-text-success">
+					<span class="icon">
+						<i class="mdi mdi-24px mdi-server-network" aria-hidden="true"></i>
+					</span>
+					<span>Connected</span>
+				</span>
+				{% else %}
+				<span class="icon-text has-text-danger">
+					<span class="icon">
+						<i class="mdi mdi-24px mdi-server-network-off" aria-hidden="true"></i>
+					</span>
+					<span>Disconnected</span>
+				</span>
+				{% endif %}
+			</button>
+		</header>
+				{% if conf_data['status'] == "running" %}
+		<div class="card-content">
+			<div class="content">
+				<div class="columns">
+					<div class="column is-half">
+						<ul class="block-list is-small is-highlighted is-info">
+							<li>Local address(es): {{conf_data['address']}}</li>
+							<li>Local port: {{conf_data['listen_port']}}</li>
+                            {% if conf_data['dns'] != "" %}
+                            <li class="has-tooltip" data-tooltip="Advertised by the server">DNS server(s): {{conf_data['dns']}}</li>
+                            {% endif %}
+			    {% if conf_data['handshake'] == "never" %}
+			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Never connected - check your configuration">Last handshake: <span class="has-text-danger">{{conf_data['handshake']}}</span></li>
+			    {% else %}
+                            <li>Last handshake: {{conf_data['handshake']}}</li>
+			    {% endif %}
+						</ul>
+					</div>
+					<div class="column is-half">
+						<ul class="block-list is-small is-highlighted is-info">
+							<li>Connected to: {{conf_data['endpoints']}}
+                            {% if conf_data['peer_description'] != "" %}
+							(Known as: {{conf_data['peer_description']}})
+                            {% endif %}
+                            </li>
+                            <li>Remote network(s): {{conf_data['allowed_ips']}}</li>
+                            {% if conf_data['preshared_key'] == "(none)" %}
+							<li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Preshared keys improve security">Uses preshared key: <span class="has-text-danger"> No </span></li>
+                            {% else %}
+							<li class="is-small is-highlighted is-success">Uses preshared key: <span class="has-text-success">Yes</span></li>
+                            {% endif %}
+                            {% if conf_data['persistent_keepalive'] == "off" %}
+			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Keepalive allows the system to be always reachable">Keepalive setting (seconds): <span class="has-text-danger"> {{conf_data['persistent_keepalive']}} </span></li>
+				{% else %}
+				<li class="is-small is-highlighted is-success">Keepalive setting (seconds): <span class="has-text-success"> {{conf_data['persistent_keepalive']}}</span></li>
+                            {% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="card-footer">
+			<span class="card-footer-item">Upload:<br>{{conf_data['upload']}} Mb</span>
+			<span class="card-footer-item">Download:<br>{{conf_data['download']}} Mb</span>
+			<span class="card-footer-item">Total transfer:<br>{{conf_data['transfer']}} Mb</span>
+		</footer>
+				{% endif %}
+	</div>
+{% endfor %}
+</div>
+
