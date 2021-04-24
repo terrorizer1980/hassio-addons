@@ -1,3 +1,8 @@
+# 0.3.1 
+- Documentation corrections
+- Seperate license file
+- Screenshot for better understanding of what it provides
+
 # 0.3.0 
 - Modified the configuration to allow all valid options
 - Added monitoring frontend inspired by https://github.com/donaldzou/wireguard-dashboard

@@ -10,7 +10,7 @@
 		"amd64", 
 		"i386"
    ],
-	"url":"https://github.com/s482dcaw/hassio-addons/wireguard-clients",
+	"url":"https://github.com/s482dcaw/hassio-addons",
 	"webui": "http://[HOST]:[PORT:8243]",
 	"startup":"application",
 	"boot":"auto",
