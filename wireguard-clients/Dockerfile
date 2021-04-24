@@ -47,7 +47,7 @@ LABEL \
     org.opencontainers.image.authors="s482dcaw <https://github.com/s482dcaw>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/s482dcaw/hassio-addons/wireguard-clients" \
-    org.opencontainers.image.documentation="https://github.com/s482dcaw/hassio-addons/wireguard-clients/blob/main/README.md" \
+    org.opencontainers.image.documentation="https://github.com/s482dcaw/hassio-addons/wireguard-clients/blob/master/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
