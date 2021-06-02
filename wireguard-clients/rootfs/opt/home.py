@@ -10,7 +10,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 conf_data = {}
 
-# Checked - no DB - wg show
+# Checked wg show
 def get_interfaces():
     conf = []
     for i in os.listdir(conf_location):
@@ -58,7 +58,7 @@ def get_configuration_data(config_name):
 
     return conf_data
 
-# Checked - no DB - wg show
+# Checked - wg show
 def get_running_data(config_name):
     try:
     	result = subprocess.run(["wg", "show", config_name, "dump"], stdout=subprocess.PIPE)
@@ -105,12 +105,14 @@ def get_running_data(config_name):
 
     if int(latest_handshake) == 0:
         handshake = "never"
+        connected = "no"
     else:
         now = datetime.now()
         minus = now - datetime.fromtimestamp(int(latest_handshake))
         handshake =  str(minus).split(".")[0]
+        connected = "yes"
 
-    conf_data.update({"upload":upload_total, "download":download_total, "transfer":transfer_total, "handshake":handshake})
+    conf_data.update({"upload":upload_total, "download":download_total, "transfer":transfer_total, "handshake":handshake, "connected":connected})
 
     return conf_data
 

@@ -1,3 +1,6 @@
+# 0.3.2 
+- Differentiate between started and connected
+
 # 0.3.1 
 - Documentation corrections
 - Seperate license file

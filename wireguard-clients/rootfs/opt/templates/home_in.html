@@ -14,12 +14,29 @@
 					<span class="icon">
 						<i class="mdi mdi-24px mdi-server-network" aria-hidden="true"></i>
 					</span>
-					<span>Connected</span>
+					<span>Started</span>
 				</span>
 				{% else %}
 				<span class="icon-text has-text-danger">
 					<span class="icon">
 						<i class="mdi mdi-24px mdi-server-network-off" aria-hidden="true"></i>
+					</span>
+					<span>Stopped</span>
+				</span>
+				{% endif %}
+			</button>
+			<button class="card-header-icon" aria-label="status">
+				{% if conf_data['connected'] == "yes" %}
+				<span class="icon-text has-text-success">
+					<span class="icon">
+						<i class="mdi mdi-24px mdi-security-network" aria-hidden="true"></i>
+					</span>
+					<span>Connected</span>
+				</span>
+				{% else %}
+				<span class="icon-text has-text-danger">
+					<span class="icon">
+						<i class="mdi mdi-24px mdi-security-network" aria-hidden="true"></i>
 					</span>
 					<span>Disconnected</span>
 				</span>
@@ -46,7 +63,7 @@
 					</div>
 					<div class="column is-half">
 						<ul class="block-list is-small is-highlighted is-info">
-							<li>Connected to: {{conf_data['endpoints']}}
+							<li>Configured server: {{conf_data['endpoints']}}
                             {% if conf_data['peer_description'] != "" %}
 							(Known as: {{conf_data['peer_description']}})
                             {% endif %}
