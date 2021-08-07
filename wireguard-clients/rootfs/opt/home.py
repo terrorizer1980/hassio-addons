@@ -162,13 +162,17 @@ def get_info():
 def start_stop(interface):
 
     running=get_running_data(interface)
+    if request.headers.get("X-Ingress-Path"):
+        x_ingress=request.headers.get("X-Ingress-Path")
+    else:
+        x_ingress='/'
 
     if running["status"] == "stopped":
         try:
             result = subprocess.check_output(["wg-quick", "up", interface], text=True)
 
         except Exception:
-            return redirect('/')
+            return redirect(x_ingress)
             app.logger.warning(Exception)
 
     else:
@@ -176,11 +180,11 @@ def start_stop(interface):
             result = subprocess.check_output(["wg-quick", "down", interface], text=True)
 
         except Exception:
-            return redirect('/')
+            return redirect(x_ingress)
             app.logger.warning(Exception)
 
     time.sleep(1)
-    return redirect('/')
+    return redirect(x_ingress)
 
 if __name__ == "__main__":
 
