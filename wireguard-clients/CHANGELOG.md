@@ -1,8 +1,12 @@
+# 0.4.1 
+- Minor update to fix issues with the frontend not working through home assistant
+
 # 0.4.0 
 - Major change: The interfaces can be marked as disabled so they don't start on boot. Read the documentation for configuration information
 - Major change: You can now start / stop the interfaces from the web frontend. This does not change the configuration which is read on boot time
 - Bump base image to base-python 7.10
 - Bump wireguard to wireguard-tools-1.0.20210424-r0
+- Bump pip3 to py3-pip-20.3.4-r1
 - Remove jq.sh as it is now fixed upstream
 
 # 0.3.2 
