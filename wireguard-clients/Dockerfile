@@ -22,7 +22,7 @@ RUN \
 # Removed in version 0.4.0
 # py3-flask=2.0.1-r0 \
 	\
-	&& /usr/local/bin/pip install \
+	&& pip3 install \
 		--no-cache-dir \
  		flask \
 		configparser 
