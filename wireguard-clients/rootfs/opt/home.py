@@ -131,6 +131,11 @@ def home():
 
 @app.route('/get_info/', methods=['GET'])
 def get_info():
+    x_ingress=""
+
+    if request.headers.get("X-Ingress-Path"):
+        x_ingress=request.headers.get("X-Ingress-Path")
+
 
     alldata=[]
 
@@ -150,7 +155,7 @@ def get_info():
 
         alldata.append(conf_data)
 
-    return render_template('home_in.html', alldata=alldata)
+    return render_template('home_in.html', alldata=alldata, x_ingress=x_ingress)
 
 
 @app.route('/start_stop/<interface>', methods=['GET'])

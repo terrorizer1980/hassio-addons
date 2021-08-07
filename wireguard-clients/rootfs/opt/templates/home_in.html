@@ -113,8 +113,8 @@
 {% for conf_data in alldata %}
 
     document.getElementById("switch-{{conf_data['name']}}").addEventListener('change', function() {
-	    location.replace("/start_stop/{{conf_data['name']}}");
 	    console.log("clicked on: switch-{{conf_data['name']}}");
+	    location.replace("{{ x_ingress }}/start_stop/{{conf_data['name']}}");
     });
 
 {% endfor %}
