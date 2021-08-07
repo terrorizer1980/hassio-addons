@@ -1,5 +1,5 @@
 # Build arguments
-# ARG BUILD_ARCH=amd64
+ARG BUILD_ARCH=amd64
 ARG BUILD_DATE
 ARG BUILD_REF
 ARG BUILD_VERSION
@@ -22,7 +22,7 @@ RUN \
 # py3-pip=20.3.4-r1 \
 # py3-flask=2.0.1-r0 \
 	\
-	&& pip3 install \
+	&& /usr/local/bin/pip install \
 		--no-cache-dir \
  		flask \
 		configparser 
