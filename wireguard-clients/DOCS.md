@@ -62,12 +62,17 @@ except for MTU and Table; the default settings make perfect sense
 
 Options that are only for the server are not allowed - such as ListenPort
 
-Two options won't be added to the Wireguard configuration, but can be used
-in the frontend, if they exist. Specifically:
+Three options won't be added to the Wireguard configuration, but can be used
+and 2 of them shown in the frontend, if they exist. Specifically: 
 * interface_description
 * peer_description
+* interface_disabled
 
-As this add on sets up clients, you are expected to initiate the connections.
+If interface_disabled is true, then the tunnel will not start automatically
+at boot time. You can always start (and stop) any tunnel from the web frontend.
+
+
+As this add-on sets up clients, you are expected to initiate the connections.
 If this is not the case you're thinking about, and you want to use this plugin 
 to access your Home Assistant over a WireGuard tunnel, make sure you have a 
 reasonable value for **peer_persistent_keepalive**
@@ -79,6 +84,7 @@ A sample configuration looks like that: IP addresses are provided as a sample
 connections:
   - interface_name: wg0
     interface_description: A Description 
+    interface_disabled: false 
     interface_dns:
       - 10.0.0.10
     interface_private_key: REPLACE_WITH_THE_INTERFACES_PRIVATE_KEY
@@ -98,6 +104,7 @@ connections:
   - interface_name: backup
     interface_private_key: REPLACE_WITH_THE_INTERFACES_PRIVATE_KEY
     interface_dns: []
+    interface_disabled: true
     interface_address:
       - 10.0.1.1/24
     interface_preup: []
@@ -117,5 +124,5 @@ connections:
 ## Web UI
 
 The Web UI, accessible only from within Home Assistant, allows you to monitor the
-status of your tunnels. It auto-refreshes every 30 seconds. 
+status of your tunnels, as well as start and stop them at will. It auto-refreshes every 30 seconds. 
 

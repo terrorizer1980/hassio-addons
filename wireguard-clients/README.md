@@ -30,3 +30,9 @@ https://github.com/donaldzou/wireguard-dashboard
 Available under Apache License v2
 Parts Copyright (c) 2021 Donald Zou
 
+CSS libraries by 
+Bulma - https://bulma.io/
+Bulma block list - https://github.com/chrisrhymes/bulma-block-list
+Bulma switch - https://github.com/Wikiki/bulma-switch
+Bulma tooltip - https://github.com/creativebulma/bulma-tooltip
+

@@ -16,11 +16,25 @@ export WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1
 # Only configured interfaces
 
 for f in /etc/wireguard/*.conf; do
-    interface=$(basename $f .conf)
-     (exec wg-quick up "${interface}")
+ 	interface=$(basename $f .conf)
+        bashio::log.info "Evaluating Interface ${interface}"
+	# in case the user doesn't have the entry in the .comments file
+	set +e
+		inactive=$(grep "Disabled" /etc/wireguard/${interface}.comments)
+	set -e
+	inactive=$(echo ${inactive} | awk -F= '{print $2}' | xargs)
+	if [ "${inactive}" != "true" ]; then
+		bashio::log.info "Starting Interface ${interface}"
+		(exec wg-quick up "${interface}")
+		bashio::log.info "Interface ${interface} started"
+	else
+       		bashio::log.info "Interface ${interface} is disabled"
+	fi
 done
+
+bashio::log.info "Starting Web Frontend"
 
 cd /opt/ || bashio::exit.nok
 exec python3 home.py 2> /dev/null 
 
-
+bashio::log.info "Done"

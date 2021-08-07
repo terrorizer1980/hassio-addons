@@ -2,82 +2,97 @@
 {% for conf_data in alldata %}
 	<div class="card mb-4">
 		<header class="card-header">
-			<p class="card-header-title has-background-info-dark has-text-white level">
-			<span class="level-left"><span class="has-text-weight-light">interface:</span> {{conf_data['name']}}</span>
-             {% if conf_data['interface_description'] != "" %}
-            <span class="is-uppercase level-right">{{ conf_data['interface_description']}} </span>
-             {% endif %}
-			</p>
-			<button class="card-header-icon" aria-label="status">
+			<div class="card-header-title level">
+			<span class="level-left">
+				{% if conf_data['interface_description'] != "" %}
+				<span class="is-uppercase">{{ conf_data['interface_description']}} : </span>
+				{% else %}
+				<span class="has-text-weight-light">anonymous interface : </span>
+				{% endif %}
+			{{conf_data['name']}}
+			</span>
+			<span class="field level-center">
+				{% if conf_data['status'] == "running" %}
+				<input id="switch-{{conf_data['name']}}" type="checkbox" name="switch-{{conf_data['name']}}" class="switch is-success" checked="checked">
+				{% else %} 
+				<input id="switch-{{conf_data['name']}}" type="checkbox" name="switch-{{conf_data['name']}}" class="switch is-success">
+				{% endif %}
+				<label for="switch-{{conf_data['name']}}"></label>
+			</span>
+			<span class="level-right">
 				{% if conf_data['status'] == "running" %}
 				<span class="icon-text has-text-success">
 					<span class="icon">
 						<i class="mdi mdi-24px mdi-server-network" aria-hidden="true"></i>
 					</span>
-					<span>Started</span>
+					Started
 				</span>
 				{% else %}
 				<span class="icon-text has-text-danger">
 					<span class="icon">
 						<i class="mdi mdi-24px mdi-server-network-off" aria-hidden="true"></i>
 					</span>
-					<span>Stopped</span>
+					Stopped
 				</span>
 				{% endif %}
-			</button>
-			<button class="card-header-icon" aria-label="status">
+				<div style="display: flex;">
+					<div style="flex: 1;height: 20px; background-color: #f4f5f8"></div>
+					<div class="divider is-vertical"></div>
+					<div style="flex: 1;height: 20px; background-color: #f4f5f8"></div>
+				<div>
 				{% if conf_data['connected'] == "yes" %}
 				<span class="icon-text has-text-success">
 					<span class="icon">
 						<i class="mdi mdi-24px mdi-security-network" aria-hidden="true"></i>
 					</span>
-					<span>Connected</span>
+					Connected
 				</span>
 				{% else %}
 				<span class="icon-text has-text-danger">
 					<span class="icon">
 						<i class="mdi mdi-24px mdi-security-network" aria-hidden="true"></i>
 					</span>
-					<span>Disconnected</span>
+					Disconnected
 				</span>
 				{% endif %}
-			</button>
+			</span>
+			</div>
 		</header>
-				{% if conf_data['status'] == "running" %}
+		{% if conf_data['status'] == "running" %}
 		<div class="card-content">
 			<div class="content">
 				<div class="columns">
 					<div class="column is-half">
 						<ul class="block-list is-small is-highlighted is-info">
-							<li>Local address(es): {{conf_data['address']}}</li>
-							<li>Local port: {{conf_data['listen_port']}}</li>
+							<li><span class="has-text-weight-semibold">Local address(es):</span> {{conf_data['address']}}</li>
+							<li><span class="has-text-weight-semibold">Local port:</span> {{conf_data['listen_port']}}</li>
                             {% if conf_data['dns'] != "" %}
-                            <li class="has-tooltip" data-tooltip="Advertised by the server">DNS server(s): {{conf_data['dns']}}</li>
+			    <li class="has-tooltip" data-tooltip="Advertised by the server"><span class="has-text-weight-semibold">DNS server(s):</span> {{conf_data['dns']}}</li>
                             {% endif %}
 			    {% if conf_data['handshake'] == "never" %}
-			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Never connected - check your configuration">Last handshake: <span class="has-text-danger">{{conf_data['handshake']}}</span></li>
+			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Never connected - check your configuration"><span class="has-text-weight-semibold">Last handshake:</span> <span class="has-text-danger">{{conf_data['handshake']}}</span></li>
 			    {% else %}
-                            <li>Last handshake: {{conf_data['handshake']}}</li>
+			    <li><span class="has-text-weight-semibold">Last handshake:</span> {{conf_data['handshake']}}</li>
 			    {% endif %}
 						</ul>
 					</div>
 					<div class="column is-half">
 						<ul class="block-list is-small is-highlighted is-info">
-							<li>Configured server: {{conf_data['endpoints']}}
+							<li><span class="has-text-weight-semibold">Configured server:</span> {{conf_data['endpoints']}}
                             {% if conf_data['peer_description'] != "" %}
 							(Known as: {{conf_data['peer_description']}})
                             {% endif %}
                             </li>
-                            <li>Remote network(s): {{conf_data['allowed_ips']}}</li>
+			    <li><span class="has-text-weight-semibold">Remote network(s):</span> {{conf_data['allowed_ips']}}</li>
                             {% if conf_data['preshared_key'] == "(none)" %}
-							<li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Preshared keys improve security">Uses preshared key: <span class="has-text-danger"> No </span></li>
+			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Preshared keys improve security"><span class="has-text-weight-semibold">Uses preshared key:</span> <span class="has-text-danger"> No </span></li>
                             {% else %}
-							<li class="is-small is-highlighted is-success">Uses preshared key: <span class="has-text-success">Yes</span></li>
+			    <li class="is-small is-highlighted is-success"><span class="has-text-weight-semibold">Uses preshared key:</span> <span class="has-text-success">Yes</span></li>
                             {% endif %}
                             {% if conf_data['persistent_keepalive'] == "off" %}
-			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Keepalive allows the system to be always reachable">Keepalive setting (seconds): <span class="has-text-danger"> {{conf_data['persistent_keepalive']}} </span></li>
+			    <li class="is-small is-highlighted is-danger has-tooltip" data-tooltip="Keepalive allows the system to be always reachable"><span class="has-text-weight-semibold">Keepalive setting (seconds):</span> <span class="has-text-danger"> {{conf_data['persistent_keepalive']}} </span></li>
 				{% else %}
-				<li class="is-small is-highlighted is-success">Keepalive setting (seconds): <span class="has-text-success"> {{conf_data['persistent_keepalive']}}</span></li>
+				<li class="is-small is-highlighted is-success"><span class="has-text-weight-semibold">Keepalive setting (seconds):</span> <span class="has-text-success"> {{conf_data['persistent_keepalive']}}</span></li>
                             {% endif %}
 						</ul>
 					</div>
@@ -94,3 +109,13 @@
 {% endfor %}
 </div>
 
+<script>
+{% for conf_data in alldata %}
+
+    document.getElementById("switch-{{conf_data['name']}}").addEventListener('change', function() {
+	    location.replace("/start_stop/{{conf_data['name']}}");
+	    console.log("clicked on: switch-{{conf_data['name']}}");
+    });
+
+{% endfor %}
+</script>

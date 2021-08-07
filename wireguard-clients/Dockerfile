@@ -1,38 +1,34 @@
 # Build arguments
-
-ARG BUILD_ARCH=amd64
+# ARG BUILD_ARCH=amd64
 ARG BUILD_DATE
 ARG BUILD_REF
 ARG BUILD_VERSION
 
 # For addon
-ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/${BUILD_ARCH}:6.0.3
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/${BUILD_ARCH}:7.1.0
 #For testing
-#ARG BUILD_FROM=ghcr.io/home-assistant/${BUILD_ARCH}-base-python:3.9-alpine3.13
+#ARG BUILD_FROM=ghcr.io/home-assistant/${BUILD_ARCH}-base-python:3.9-alpine3.14
 FROM ${BUILD_FROM}
 
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Setup base
-# hadolint ignore=DL3003
-	#python3-pip \
 RUN \
     apk add --no-cache \
+        wireguard-tools=1.0.20210424-r0 \
         openresolv=3.12.0-r0 \
-        wireguard-tools=1.0.20200827-r1 \
-	py3-pip=20.3.4-r0 \
-	py3-flask=1.1.2-r1 \
+# Removed in version 0.4.0
+# py3-pip=20.3.4-r1 \
+# py3-flask=2.0.1-r0 \
 	\
 	&& pip3 install \
 		--no-cache-dir \
-		configparser
-
+ 		flask \
+		configparser 
 
 # Copy root filesystem
 COPY rootfs /
-
 
 # Labels
 LABEL \

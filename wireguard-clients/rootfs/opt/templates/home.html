@@ -21,7 +21,6 @@
     <section class="section" id="wg_show">
   
     </section>
-</body>
 
 <script>
 
@@ -48,6 +47,12 @@ function loadXMLDoc() {
 	if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
 		if (xmlhttp.status == 200) {
 		    	wgshow.innerHTML = xmlhttp.responseText;
+			var extrascripts = wgshow.getElementsByTagName("script");
+			console.log('Scrtips ounf: '+extrascripts.length);
+			for (var i=0; i < extrascripts.length; i++) {
+				console.log(extrascripts[i].text);
+				if(extrascripts[i].text!=null) eval(extrascripts[i].text);
+			}
 		}
 		else if (xmlhttp.status == 400) {
 			alert('There was an error 400');
@@ -73,5 +78,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 </script>
+</body>
 </html>
 

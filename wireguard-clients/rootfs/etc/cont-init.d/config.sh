@@ -178,6 +178,11 @@ for (( EXCOUNTER=0; EXCOUNTER<${exlen}; EXCOUNTER+=1 )); do
 		interface_description=$(bashio::jq "${connection}" '.interface_description')
 		echo "Description = ${interface_description}" >> "${additional}"
 	fi
+	if bashio::jq.has_value "${connection}" '.interface_disabled'; then
+		interface_disabled=$(bashio::jq "${connection}" '.interface_disabled')
+		echo "Disabled = ${interface_disabled}" >> "${additional}"
+	fi
+
 
 
 	######################
