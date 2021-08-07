@@ -18,8 +18,8 @@ RUN \
     apk add --no-cache \
         wireguard-tools=1.0.20210424-r0 \
         openresolv=3.12.0-r0 \
+	py3-pip=20.3.4-r1 \
 # Removed in version 0.4.0
-# py3-pip=20.3.4-r1 \
 # py3-flask=2.0.1-r0 \
 	\
 	&& /usr/local/bin/pip install \
