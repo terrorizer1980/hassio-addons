@@ -1,6 +1,6 @@
 {
 	"name":"WireGuard Clients",
-	"version":"1.0.0",
+	"version":"1.0.1",
 	"slug":"wireguard_clients",
 	"description":"Connect to unlimited fast secure Wireguard tunnels (as a client)",
 	"arch":[
@@ -103,7 +103,7 @@
 				"peer_allowed_ips": [
 					"str"
 				],
-				"peer_persistent_keep_alive": "str?"
+				"peer_persistent_keep_alive": "int?"
 			   }
 		   ]
 	   }

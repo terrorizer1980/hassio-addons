@@ -1,3 +1,6 @@
+# 1.0.1 
+- Fixed a definition problem for peer_persistent_keep_alive 
+
 # 1.0.0 
 - After some long-time operation without issues, moving to image-based deployment
 
