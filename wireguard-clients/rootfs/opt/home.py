@@ -2,7 +2,6 @@ import os
 from flask import Flask, request, render_template, redirect, url_for
 import subprocess
 from configparser import ConfigParser
-#from datetime import datetime, date, time, timedelta
 from datetime import datetime, timedelta
 import time 
 import logging

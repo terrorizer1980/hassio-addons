@@ -5,9 +5,7 @@ ARG BUILD_REF
 ARG BUILD_VERSION
 
 # For addon
-ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/${BUILD_ARCH}:7.1.0
-#For testing
-#ARG BUILD_FROM=ghcr.io/home-assistant/${BUILD_ARCH}-base-python:3.9-alpine3.14
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/${BUILD_ARCH}:10.1.0
 FROM ${BUILD_FROM}
 
 

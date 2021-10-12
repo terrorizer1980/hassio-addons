@@ -48,9 +48,8 @@ function loadXMLDoc() {
 		if (xmlhttp.status == 200) {
 		    	wgshow.innerHTML = xmlhttp.responseText;
 			var extrascripts = wgshow.getElementsByTagName("script");
-			console.log('Scrtips ounf: '+extrascripts.length);
+			console.log('Scripts found: '+extrascripts.length);
 			for (var i=0; i < extrascripts.length; i++) {
-				console.log(extrascripts[i].text);
 				if(extrascripts[i].text!=null) eval(extrascripts[i].text);
 			}
 		}

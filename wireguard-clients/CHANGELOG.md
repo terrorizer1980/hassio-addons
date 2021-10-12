@@ -1,3 +1,6 @@
+# 1.0.0 
+- After some long-time operation without issues, moving to image-based deployment
+
 # 0.4.1 
 - Minor update to fix issues with the frontend not working through home assistant
 

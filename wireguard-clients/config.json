@@ -1,6 +1,6 @@
 {
 	"name":"WireGuard Clients",
-	"version":"0.4.1",
+	"version":"1.0.0",
 	"slug":"wireguard_clients",
 	"description":"Connect to unlimited fast secure Wireguard tunnels (as a client)",
 	"arch":[
@@ -11,6 +11,7 @@
 		"i386"
    ],
 	"url":"https://github.com/s482dcaw/hassio-addons/tree/master/wireguard-clients",
+	"image": "ghcr.io/s482dcaw/wireguard-clients",
 	"webui": "http://[HOST]:[PORT:8243]",
 	"startup":"application",
 	"boot":"auto",
